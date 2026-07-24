@@ -3,29 +3,21 @@
 
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
-*.pyd
 
 # VS Code
 .vscode/
+
+# JetBrains
+.idea/
+
+# Logs
+*.log
 
 # Windows
 Thumbs.db
 Desktop.ini
 
-# Python cache
-.pytest_cache/
-
-# Jupyter
-.ipynb_checkpoints/
-
-# Build
-build/
-dist/
-
-# Environment
-.env
-
-# Mac
+# macOS
 .DS_Store
