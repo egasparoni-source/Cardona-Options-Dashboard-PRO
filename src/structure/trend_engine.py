@@ -3,22 +3,25 @@ class TrendEngine:
     @staticmethod
     def analyze(data):
 
-        ema20 = data["EMA20"].iloc[-1]
-        ema50 = data["EMA50"].iloc[-1]
-        ema200 = data["EMA200"].iloc[-1]
+        last = data.iloc[-1]
 
-        price = data["Close"].iloc[-1]
+        ema20 = last["EMA20"]
+        ema40 = last["EMA40"]
+        ema100 = last["EMA100"]
+        ema200 = last["EMA200"]
 
-        if price > ema20 > ema50 > ema200:
-            trend = "STRONG_BULL"
+        price = last["Close"]
 
-        elif price > ema50:
-            trend = "BULL"
+        if price > ema20 > ema40 > ema100 > ema200:
+            return "STRONG_BULL"
 
-        elif price < ema20 < ema50 < ema200:
-            trend = "STRONG_BEAR"
+        elif price > ema40 > ema100 > ema200:
+            return "BULL"
 
-        else:
-            trend = "NEUTRAL"
+        elif price < ema20 < ema40 < ema100 < ema200:
+            return "STRONG_BEAR"
 
-        return trend
+        elif price < ema40 < ema100 < ema200:
+            return "BEAR"
+
+        return "NEUTRAL"

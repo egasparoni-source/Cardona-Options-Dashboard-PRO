@@ -15,3 +15,11 @@ pprint(context["signal"])
 print("\n===== MTF =====\n")
 
 pprint(context["mtf"])
+print("\n===== STRUCTURE =====\n")
+pprint(context["structure"])
+
+print("\n===== PM40 =====\n")
+pprint(context["pm40"])
+
+print("\n===== RISK =====\n")
+pprint(context["risk"])
