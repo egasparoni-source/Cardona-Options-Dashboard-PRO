@@ -1,15 +1,16 @@
 import customtkinter as ctk
 
-from src import dashboard, scanner
+from src import dashboard, risk, scanner
 from src.controller.dashboard_controller import DashboardController
 
-from src.dashboard import content
+from src.dashboard import content, topbar
 from src.widgets.chart_widget import ChartWidget
 from src.widgets.watchlist_widget import WatchlistWidget
 from src.widgets.ai_widget import AIWidget
 from src.widgets.pm40_widget import PM40Widget
 from src.widgets.risk_widget import RiskWidget
 from src.widgets.scanner_widget import ScannerWidget
+from src.widgets.topbar_widget import TopBarWidget
 
 
 ctk.set_appearance_mode("Dark")
@@ -27,24 +28,23 @@ class MainWindow(ctk.CTk):
         self.grid_columnconfigure(1, weight=1)
         self.grid_rowconfigure(1, weight=1)
 
-        # ==========================
-        # TOP BAR
-        # ==========================
+       # ==========================
+       # TOP BAR
+       # ==========================
 
-        topbar = ctk.CTkFrame(self, height=60)
-
-        topbar.grid(
-            row=0,
-            column=0,
-            columnspan=2,
-            sticky="ew"
+        topbar = TopBarWidget(
+            self,
+            dashboard["market"]
         )
 
-        ctk.CTkLabel(
-            topbar,
-            text="CARDONA OPTIONS TRADING DASHBOARD PRO",
-            font=("Arial", 22, "bold")
-        ).pack(pady=15)
+        topbar.grid(
+          row=0,
+          column=0,
+          columnspan=2,
+          sticky="ew",
+          padx=10,
+          pady=10
+        )
 
         # ==========================
         # SIDEBAR
@@ -189,7 +189,7 @@ class MainWindow(ctk.CTk):
         risk.geometry("350x320")
 
         RiskWidget(
-        self.riskrisk,
+            risk,
             dashboard["risk"]
         ).pack(
             fill="both",
