@@ -1,42 +1,30 @@
-from src.market.market_data import MarketData
-
-
 class MarketScanner:
 
-    DEFAULT_SYMBOLS = [
-        "SPY",
-        "QQQ",
-        "AAPL",
-        "MSFT",
-        "NVDA",
-        "META",
-        "AMD",
-        "AMZN",
-        "GOOGL",
-        "TSLA",
-        "NFLX"
-    ]
-
     @staticmethod
-    def scan(symbols=None):
+    def default_watchlist():
 
-        if symbols is None:
-            symbols = MarketScanner.DEFAULT_SYMBOLS
+        return [
 
-        market = {}
+            # Índices
+            "SPY",
+            "QQQ",
+            "IWM",
 
-        for symbol in symbols:
+            # Magnificent Seven
+            "AAPL",
+            "MSFT",
+            "NVDA",
+            "META",
+            "AMZN",
+            "GOOGL",
+            "TSLA",
 
-            try:
+            # Otras grandes
+            "AMD",
+            "NFLX",
+            "AVGO",
+            "PLTR",
+            "CRM",
+            "TSM"
 
-                data = MarketData.get_price(symbol)
-
-                if data is not None and not data.empty:
-
-                    market[symbol] = data
-
-            except Exception as e:
-
-                print(f"Error descargando {symbol}: {e}")
-
-        return market
+        ]

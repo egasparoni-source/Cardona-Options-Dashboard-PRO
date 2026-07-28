@@ -1,51 +1,24 @@
-from src.controller.dashboard_controller import DashboardController
+from src.core.trading_engine import TradingEngine
 
 
 class ScannerEngine:
 
-    SYMBOLS = [
-        "SPY",
-        "QQQ",
-        "AAPL",
-        "MSFT",
-        "NVDA",
-        "META",
-        "AMD",
-        "TSLA",
-        "AMZN",
-        "GOOGL"
-    ]
-
     @staticmethod
-    def scan():
+    def scan(symbols, timeframe="1h"):
 
         results = []
 
-        for symbol in ScannerEngine.SYMBOLS:
+        for symbol in symbols:
 
             try:
 
-                dashboard = DashboardController.load(symbol)
+                context = TradingEngine.run(symbol, timeframe)
 
-                if dashboard is None:
-                    continue
+                if context is not None:
+                    results.append(context)
 
-                pm40 = dashboard["pm40"]
+            except Exception as e:
 
-                results.append({
-                    "symbol": symbol,
-                    "signal": pm40["signal"],
-                    "score": int(pm40["score"]),
-                    "entry": float(round(pm40["entry"], 2)),
-                    "rr": float(pm40["risk_reward"])
-                })
-
-            except Exception:
-                continue
-
-        results.sort(
-            key=lambda x: x["score"],
-            reverse=True
-        )
+                print(f"[ERROR] {symbol}: {e}")
 
         return results

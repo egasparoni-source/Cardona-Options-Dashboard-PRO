@@ -1,35 +1,25 @@
 class Ranking:
 
     @staticmethod
-    def calculate(df, analysis):
+    def sort(results):
 
-        if df is None or df.empty or analysis is None:
-            return 0
+        valid_results = []
 
-        score = 0
+        for result in results:
 
-        last = df.iloc[-1]
+            try:
+                if (
+                    result is not None
+                    and result.get("trade") is not None
+                    and "score" in result["trade"]
+                ):
+                    valid_results.append(result)
 
-        # Tendencia
-        if analysis["trend"] == "BULLISH":
-            score += 30
-        elif analysis["trend"] == "BEARISH":
-            score += 30
+            except Exception:
+                pass
 
-        # Señal
-        if analysis["signal"] == "BUY":
-            score += 30
-        elif analysis["signal"] == "SELL":
-            score += 30
-
-        # RSI
-        rsi = last["RSI"]
-
-        if 45 <= rsi <= 65:
-            score += 20
-
-        # Precio respecto al VWAP
-        if last["Close"] > last["VWAP"]:
-            score += 20
-
-        return score
+        return sorted(
+            valid_results,
+            key=lambda x: x["trade"]["score"],
+            reverse=True
+        )
