@@ -9,6 +9,9 @@ from src.core.steps.mtf_step import MTFStep
 from src.core.steps.structure_step import StructureStep
 from src.core.steps.pm40_step import PM40Step
 from src.core.steps.risk_step import RiskStep
+from src.core.steps.trade_step import TradeStep
+from src.core.steps.recommendation_step import RecommendationStep
+from src.core.steps.options_step import OptionsStep
 
 
 class TradingEngine:
@@ -27,6 +30,9 @@ class TradingEngine:
         pipeline.add(MTFStep.run)
         pipeline.add(PM40Step.run)
         pipeline.add(RiskStep.run)
+        pipeline.add(TradeStep.run)
+        pipeline.add(RecommendationStep.run)
+        pipeline.add(OptionsStep.run)
 
         context = pipeline.run(context)
 

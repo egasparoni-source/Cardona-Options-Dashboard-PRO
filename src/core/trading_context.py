@@ -2,31 +2,23 @@ class TradingContext:
 
     def __init__(self, symbol, timeframe):
 
+        self.symbol = symbol
+        self.timeframe = timeframe
+
         self.data = {
-
             "symbol": symbol,
-
             "timeframe": timeframe,
-
             "market": None,
-
             "indicators": None,
-
             "structure": None,
-
             "signal": None,
-
             "mtf": None,
-
             "strategy": None,
-
             "risk": None,
-
             "trade": None,
-
             "recommendation": None,
-
-            "options": None
+            "options": None,
+            "pm40": None
         }
 
     def get(self, key):

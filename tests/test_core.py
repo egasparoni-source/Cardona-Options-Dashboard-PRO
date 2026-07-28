@@ -23,3 +23,11 @@ pprint(context["pm40"])
 
 print("\n===== RISK =====\n")
 pprint(context["risk"])
+print("\n===== TRADE =====\n")
+pprint(context["trade"])
+
+print("\n===== RECOMMENDATION =====\n")
+pprint(context["recommendation"])
+
+print("\n===== OPTIONS =====\n")
+pprint(context["options"])

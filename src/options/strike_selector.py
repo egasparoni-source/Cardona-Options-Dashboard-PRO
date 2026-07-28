@@ -1,9 +1,7 @@
 class StrikeSelector:
 
     @staticmethod
-    def select(trade):
-
-        confidence = trade["confidence"]
+    def select(confidence):
 
         if confidence >= 90:
             return "ATM"

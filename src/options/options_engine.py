@@ -6,9 +6,11 @@ from src.options.contracts_selector import ContractsSelector
 class OptionsEngine:
 
     @staticmethod
-    def analyze(trade, risk, timeframe="1h"):
+    def analyze(trade, risk, recommendation, timeframe="1h"):
 
-        strike = StrikeSelector.select(trade)
+        confidence = recommendation["confidence"]
+
+        strike = StrikeSelector.select(confidence)
 
         expiration = ExpirationSelector.select(timeframe)
 
@@ -16,9 +18,9 @@ class OptionsEngine:
 
         return {
 
-            "action": trade["action"],
+            "action": recommendation["action"],
 
-            "confidence": trade["confidence"],
+            "confidence": confidence,
 
             "strike": strike,
 
